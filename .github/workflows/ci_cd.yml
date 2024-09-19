@@ -18,14 +18,14 @@ jobs:
             _build
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: |
-        ${{ runner.os }}-mix
-      
+          ${{ runner.os }}-mix
+
       - name: Setup Elixir
         uses: erlef/setup-beam@v1.17.3
         with:
           version-file: .tool-versions
           version-type: strict
-      
+
       - name: Get dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: mix deps.get
@@ -37,7 +37,7 @@ jobs:
 
       - name: Check code is formatted
         run: mix format --check-formatted
-      
+
       - name: Cache plt files
         uses: actions/cache@v4
         env:
@@ -52,6 +52,6 @@ jobs:
             ${{ env.KEY_BASE }}-
       - name: Dialyzer static analysis
         run: mix dialyzer --format github
-        
+
       - name: Check unused dependencies
         run: mix deps.unlock --check-unused
