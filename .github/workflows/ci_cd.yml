@@ -19,6 +19,8 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix
+      - name: "Log things"
+        run: ls
 
       - name: Setup Elixir
         uses: erlef/setup-beam@v1.17.3
