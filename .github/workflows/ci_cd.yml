@@ -87,15 +87,18 @@ jobs:
         id: parse-asdf
         run: ./scripts/versions.sh
 
-      - uses: docker/build-push-action@v5
-        with:
-          context: .
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          push: true
-          build-args: |
-            ELIXIR_VERSION=${{ env.ELIXIR_VERSION }}
-            OTP_VERSION=${{ env.ERLANG_VERSION }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # - uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     push: true
+      #     build-args: |
+      #       ELIXIR_VERSION=${{ env.ELIXIR_VERSION }}
+      #       OTP_VERSION=${{ env.ERLANG_VERSION }}
 
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
@@ -104,6 +107,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/ntwaliheritier/kanban_app:cache
           cache-to: type=registry,ref=ghcr.io/ntwaliheritier/kanban_app:cache,mode=max
           tags: ${{ steps.meta.outputs.tags }}
+          platforms: linux/amd64,linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           push: true
           build-args: |
