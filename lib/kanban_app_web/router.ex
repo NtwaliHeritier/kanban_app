@@ -7,6 +7,8 @@ defmodule KanbanAppWeb.Router do
 
   scope "/api", KanbanAppWeb do
     pipe_through :api
+
+    get "/", PageController, :index
   end
 
   # Enable Swoosh mailbox preview in development
