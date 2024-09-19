@@ -17,8 +17,8 @@ jobs:
             deps
             _build
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-mix
+          restore-keys: |
+            ${{ runner.os }}-mix
 
       - name: Setup Elixir
         uses: erlef/setup-beam@v1.17.3
