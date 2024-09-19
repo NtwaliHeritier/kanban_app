@@ -101,8 +101,8 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: .
-          cache-from: type=registry,ref=ghcr.io/beamops/kanban:cache
-          cache-to: type=registry,ref=ghcr.io/beamops/kanban:cache,mode=max
+          cache-from: type=registry,ref=ghcr.io/beamops/kanban_app:cache
+          cache-to: type=registry,ref=ghcr.io/beamops/kanban_app:cache,mode=max
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
